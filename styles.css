@@ -82,6 +82,57 @@ body {
   border-radius: 4px;
 }
 
+.map-container {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+  max-width: 100%;
+}
+
+.selection-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.selectable-room {
+  pointer-events: auto;
+  cursor: pointer;
+  fill: transparent;
+  stroke: transparent;
+  stroke-width: 2px;
+}
+
+.selectable-room:hover {
+  fill: rgba(37, 99, 235, 0.15);
+  stroke: rgba(37, 99, 235, 0.6);
+  stroke-width: 3px;
+}
+
+.selectable-room.selected,
+.selectable-room[aria-pressed="true"] {
+  fill: rgba(37, 99, 235, 0.35);
+  stroke: #1d4ed8;
+  stroke-width: 4px;
+  filter: drop-shadow(0 0 6px rgba(29, 78, 216, 0.6));
+}
+
+.selectable-room.selected:hover,
+.selectable-room[aria-pressed="true"]:hover {
+  fill: rgba(37, 99, 235, 0.42);
+  stroke: #1e40af;
+  stroke-width: 4.5px;
+}
+
+.selectable-room:focus-visible {
+  outline: none;
+  stroke: #2563eb;
+  stroke-width: 3.5px;
+}
+
 @media (max-width: 768px) {
   body {
     padding: 1rem 0.75rem;
