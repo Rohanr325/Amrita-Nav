@@ -21,6 +21,12 @@
             class="central-image"
           >
           <svg class="selection-overlay" viewBox="0 0 2112 1300" aria-label="Amrita Nav Floor Plan">
+            <defs>
+              <radialGradient id="gps-beam-grad" cx="0" cy="0" r="52" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.45" />
+                <stop offset="100%" stop-color="#3b82f6" stop-opacity="0" />
+              </radialGradient>
+            </defs>
             <rect id="room_nanosciences" class="selectable-room" x="730" y="197" width="113" height="326" transform="rotate(353 786.5 360)" data-name="Amrita Center for Nanosciences" data-code="ACN" role="button" tabindex="0" aria-label="Amrita Center for Nanosciences (ACN)" aria-pressed="false"><title>Amrita Center for Nanosciences (ACN)</title></rect>
             <rect id="room_special_hall" class="selectable-room" x="300" y="580" width="165" height="94" transform="rotate(354 382.5 627)" data-name="Special Programs Hall / Meditation Hall" data-code="SPH-102" role="button" tabindex="0" aria-label="Special Programs Hall / Meditation Hall (SPH-102)" aria-pressed="false"><title>Special Programs Hall / Meditation Hall (SPH-102)</title></rect>
             <rect id="room_gad_office" class="selectable-room" x="378" y="671" width="75" height="62" transform="rotate(354 415.5 702)" data-name="GAD-PR Office" data-code="GAD-103" role="button" tabindex="0" aria-label="GAD-PR Office (GAD-103)" aria-pressed="false"><title>GAD-PR Office (GAD-103)</title></rect>
@@ -77,7 +83,53 @@
             <rect id="room_1790276406943" class="selectable-room" x="860" y="300" width="56" height="44" transform="rotate(354 888 322)" data-name="Staircase" data-code="Stairs" role="button" tabindex="0" aria-label="Staircase (Stairs)" aria-pressed="false"><title>Staircase (Stairs)</title></rect>
             <rect id="room_1790276513460" class="selectable-room" x="851" y="180" width="58" height="117" transform="rotate(353 880 238.5)" data-name="Northwing courtyard" data-code="R-157" role="button" tabindex="0" aria-label="Northwing courtyard (R-157)" aria-pressed="false"><title>Northwing courtyard (R-157)</title></rect>
             <rect id="room_1790276565459" class="selectable-room" x="872" y="346" width="58" height="134" transform="rotate(353 901 413)" data-name="Northwing courtyard" data-code="R-157" role="button" tabindex="0" aria-label="Northwing courtyard (R-157)" aria-pressed="false"><title>Northwing courtyard (R-157)</title></rect>
+
+            <!-- GPS Live Location Marker -->
+            <g id="gps-marker" class="gps-marker" style="display: none;" transform="translate(380, 830)" aria-label="Live GPS Location">
+              <title id="gps-marker-title">Live GPS Location</title>
+              <circle id="gps-accuracy-ring" class="gps-accuracy-ring" cx="0" cy="0" r="35" />
+              <circle class="gps-pulse-ring" cx="0" cy="0" r="14" />
+              <g id="gps-heading-cone" class="gps-heading-cone" style="display: none;">
+                <path class="gps-beam" d="M 0 0 L -18 -48 A 52 52 0 0 1 18 -48 Z" fill="url(#gps-beam-grad)" />
+                <polygon class="gps-arrow" points="0,-28 6,-12 -6,-12" />
+              </g>
+              <circle class="gps-pin-shadow" cx="0" cy="2" r="12" />
+              <circle class="gps-pin-outer" cx="0" cy="0" r="11" />
+              <circle class="gps-pin-inner" cx="0" cy="0" r="8" />
+              <circle class="gps-pin-center" cx="0" cy="0" r="3" />
+            </g>
           </svg>
+
+          <!-- Floating GPS Control Dock -->
+          <div class="gps-dock" id="gps-dock">
+            <button id="gps-toggle-btn" class="gps-toggle-btn" type="button" aria-label="Toggle Live GPS Location" title="Toggle Live GPS Location">
+              <svg class="gps-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M12 2v3m0 14v3M2 12h3m14 0h3"></path>
+              </svg>
+              <span class="gps-status-dot" id="gps-status-dot"></span>
+              <span class="gps-btn-text" id="gps-btn-text">Locate Me</span>
+            </button>
+
+            <div id="gps-status-card" class="gps-status-card" style="display: none;">
+              <div class="gps-status-header">
+                <span id="gps-status-text" class="gps-status-text">Acquiring GPS fix...</span>
+                <button id="gps-close-status" class="gps-close-btn" type="button" aria-label="Close status" title="Close status">✕</button>
+              </div>
+              <div class="gps-status-meta" id="gps-status-meta" style="display: none;">
+                <span id="gps-coords-text"></span>
+                <span id="gps-accuracy-text"></span>
+              </div>
+              <div class="gps-status-actions">
+                <button id="gps-sim-btn" class="gps-sim-btn" type="button" title="Simulate walking along campus corridors">
+                  <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                  <span id="gps-sim-btn-text">Simulate Walk</span>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
